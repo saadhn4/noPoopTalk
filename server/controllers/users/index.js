@@ -7,10 +7,7 @@ router.post("/register", async (req, res) => {
   try {
     let userData = req.body;
     console.log(userData);
-    let userCheck = await userModel.find({ username: userData.username });
-    if (userCheck) {
-      return res.status(404).json({ msg: "User already registered!!" });
-    }
+
     await userModel.create(userData);
     res.status(200).json({ msg: "User Registered! 💻📱" });
   } catch (error) {
@@ -53,6 +50,27 @@ router.put("/put/:suhail", async (req, res) => {
 
     await userModel.updateOne({ username: userParams }, { $set: userUpdate });
     res.status(200).json({ msg: "Updated!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: error });
+  }
+});
+
+router.delete("/delete/:username", async (req, res) => {
+  try {
+    let userParams = req.params.username;
+    await userModel.deleteOne({ username: userParams });
+    res.status(200).json({ msg: "Deleted User Succesfully!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: error });
+  }
+});
+
+router.delete("/deleteall", async (req, res) => {
+  try {
+    await userModel.deleteMany({});
+    res.status(200).json({ msg: "All users deleted!" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: error });
