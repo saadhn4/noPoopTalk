@@ -43,9 +43,9 @@ In updateOne, or in deleteOne, you should only take unique values. (username,ema
 
 */
 
-router.put("/put/:suhail", async (req, res) => {
+router.put("/put/:username", async (req, res) => {
   try {
-    let userParams = req.params.suhail;
+    let userParams = req.params.username;
     let userUpdate = req.body;
 
     await userModel.updateOne({ username: userParams }, { $set: userUpdate });
