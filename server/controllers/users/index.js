@@ -1,13 +1,15 @@
 import express from "express";
 import userModel from "../../models/Users/Users.js";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
   try {
     let userData = req.body;
-    console.log(userData);
-
+    //hashing the password being entered in line 11,12
+    let hash = await bcrypt.hash(userData.password, 10);
+    userData.password = hash;
     await userModel.create(userData);
     res.status(200).json({ msg: "User Registered! 💻📱" });
   } catch (error) {

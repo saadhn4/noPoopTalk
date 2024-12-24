@@ -1,0 +1,9 @@
+implement:
+1. bcrypt password hashing
+2. jwt auth middleware
+3. public and priv routes
+4. email verify , phone verify
+5. express projects
+
+2. JWT Authentication:
+
